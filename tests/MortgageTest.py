@@ -1,7 +1,7 @@
 '''
 CS3250 - Software Development Methods and Tools - Fall 2026
 Instructor: Thyago Mota
-Student:
+Student: Isabella Eaton
 Description: Homework 10 - Blackbox Testing
 '''
 
@@ -39,32 +39,87 @@ class MortgageTest(unittest.TestCase):
     # pre-condition: price=300000, down_payment=60000, rate=6.5, years=15
     # post-condition: monthly payment is displayed as $2,090.66
     def testFifteenYearLoan(self):
-        # TODO: fill in the form with the pre-condition values, click submit, and assert the post-condition
-        raise ValueError()
+        price = self.browser.find_element(By.ID, 'price')
+        price.send_keys('300000')
+        down_payment = self.browser.find_element(By.ID, 'down_payment')
+        down_payment.send_keys('60000')
+        rate = self.browser.find_element(By.ID, 'rate')
+        rate.send_keys('6.5')
+        years = self.browser.find_element(By.ID, 'years')
+        years.send_keys('15')
+        submit = self.browser.find_element(By.ID, 'submit')
+        submit.click()
+        time.sleep(1)
+        payment = self.browser.find_element(By.ID, 'payment')
+        self.assertEqual('$2,090.66', payment.text)
 
     # pre-condition: price=450000, down_payment=90000, rate=7.25, years=30
     # post-condition: monthly payment is displayed as $2,455.83
     def testFractionalInterestRate(self):
-        # TODO: fill in the form with the pre-condition values, click submit, and assert the post-condition
-        raise ValueError()
+        price = self.browser.find_element(By.ID, 'price')
+        price.send_keys('450000')
+        down_payment = self.browser.find_element(By.ID, 'down_payment')
+        down_payment.send_keys('90000')
+        rate = self.browser.find_element(By.ID, 'rate')
+        rate.send_keys('7.25')
+        years = self.browser.find_element(By.ID, 'years')
+        years.send_keys('30')
+        submit = self.browser.find_element(By.ID, 'submit')
+        submit.click()
+        time.sleep(1)
+        payment = self.browser.find_element(By.ID, 'payment')
+        self.assertEqual('$2,455.83', payment.text)
 
     # pre-condition: price=120000, down_payment=0, rate=0, years=10
     # post-condition: monthly payment is displayed as $1,000.00
     def testZeroInterestRate(self):
-        # TODO: fill in the form with the pre-condition values, click submit, and assert the post-condition
-        raise ValueError()
+        price = self.browser.find_element(By.ID, 'price')
+        price.send_keys('120000')
+        down_payment = self.browser.find_element(By.ID, 'down_payment')
+        down_payment.send_keys('0')
+        rate = self.browser.find_element(By.ID, 'rate')
+        rate.send_keys('0')
+        years = self.browser.find_element(By.ID, 'years')
+        years.send_keys('10')
+        submit = self.browser.find_element(By.ID, 'submit')
+        submit.click()
+        time.sleep(1)
+        payment = self.browser.find_element(By.ID, 'payment')
+        self.assertEqual('$1,000.00', payment.text)
 
     # pre-condition: price=300000, down_payment=300000, rate=6.5, years=30
     # post-condition: message "Down payment must be at least zero and less than the home price" is displayed
     def testDownPaymentEqualsPrice(self):
-        # TODO: fill in the form with the pre-condition values, click submit, and assert the post-condition
-        raise ValueError()
+        price = self.browser.find_element(By.ID, 'price')
+        price.send_keys('300000')
+        down_payment = self.browser.find_element(By.ID, 'down_payment')
+        down_payment.send_keys('300000')
+        rate = self.browser.find_element(By.ID, 'rate')
+        rate.send_keys('6.5')
+        years = self.browser.find_element(By.ID, 'years')
+        years.send_keys('30')
+        submit = self.browser.find_element(By.ID, 'submit')
+        submit.click()
+        time.sleep(1)
+        error = self.browser.find_element(By.ID, 'error')
+        self.assertEqual('Down payment must be at least zero and less than the home price', error.text)
 
     # pre-condition: price=300000, down_payment=60000, rate=-1, years=30
     # post-condition: message "Interest rate cannot be negative" is displayed
     def testNegativeInterestRate(self):
-        # TODO: fill in the form with the pre-condition values, click submit, and assert the post-condition
-        raise ValueError()
+        price = self.browser.find_element(By.ID, 'price')
+        price.send_keys('300000')
+        down_payment = self.browser.find_element(By.ID, 'down_payment')
+        down_payment.send_keys('60000')
+        rate = self.browser.find_element(By.ID, 'rate')
+        rate.send_keys('-1')
+        years = self.browser.find_element(By.ID, 'years')
+        years.send_keys('30')
+        submit = self.browser.find_element(By.ID, 'submit')
+        submit.click()
+        time.sleep(1)
+        error = self.browser.find_element(By.ID, 'error')
+        self.assertEqual('Interest rate cannot be negative', error.text)
 
 if __name__ == '__main__':
     unittest.main()
